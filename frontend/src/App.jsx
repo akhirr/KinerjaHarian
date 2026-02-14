@@ -1,21 +1,30 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "./layouts/login";
-import Dashboard from "./layouts/dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Dashboard from "./pages/dashboard";
+import AktivitasHarian from "./pages/aktivitas";
+import Login from "./pages/login"; // login Anda yg sudah ada
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
+          <DashboardLayout title="Dashboard">
             <Dashboard />
-          </ProtectedRoute>
+          </DashboardLayout>
         }
       />
+
+      <Route
+        path="/aktivitas"
+        element={
+          <DashboardLayout title="Aktivitas Harian">
+            <AktivitasHarian />
+          </DashboardLayout>
+        }
+      />
+
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );
 }
